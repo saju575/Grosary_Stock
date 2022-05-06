@@ -19,25 +19,25 @@ const Login = () => {
 		password: "",
 	});
 
-	//const [err, setErr] = useState("");
+	const [err, setErr] = useState("");
 	const [signInWithEmailAndPassword, user, loading, error] =
 		useSignInWithEmailAndPassword(auth);
 	const [signInWithGoogle, userg, errorg] = useSignInWithGoogle(auth);
-	console.log(userg);
+	//console.log(userg);
 	// //reset password
 	const [sendPasswordResetEmail, sending, reError] =
 		useSendPasswordResetEmail(auth);
-
+	//console.log(error.code);
 	//navigate function
 
-	// const navigate = useNavigate();
-	// const location = useLocation();
-	// const from = location.state?.from?.pathname || "/";
+	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location.state?.from?.pathname || "/";
 	// console.log(reError?.code);
 	// console.log(sending);
-	// useEffect(() => {
-	// 	setErr(reError?.code);
-	// }, [reError]);
+	useEffect(() => {
+		setErr(reError?.code);
+	}, [reError]);
 	// if (error) {
 	// 	err = error?.code;
 	// } else if (reError) {
@@ -73,11 +73,11 @@ const Login = () => {
 		setValues({ ...values, [e.target.name]: e.target.value });
 	};
 
-	// useEffect(() => {
-	// 	if (user || userg) {
-	// 		navigate(from, { replace: true });
-	// 	}
-	// }, [user, userg, navigate, from]);
+	useEffect(() => {
+		if (user || userg) {
+			navigate(from, { replace: true });
+		}
+	}, [user, userg, navigate, from]);
 	const handleUserSignIn = (e) => {
 		e.preventDefault();
 		signInWithEmailAndPassword(values.email, values.password);
@@ -153,13 +153,13 @@ const Login = () => {
 						Reset
 					</span>
 				</p>
-				{/* <p className="mt-3 text-xs text-red-500 text-center">
+				<p className="mt-3 text-xs text-red-500 text-center">
 					{error && error?.code}
-				</p> */}
+				</p>
 				{/* <p className="mt-3 text-xs text-red-500 text-center">
 					{reError && reError?.code}
 				</p>  */}
-				{/* <p className="mt-3 text-xs text-red-500 text-center">{err}</p> */}
+				<p className="mt-3 text-xs text-red-500 text-center">{err}</p>
 				<div className="flex justify-center items-center mt-3">
 					<div className="border-t-2 w-20 mt-1 mr-2"></div>
 					<span>or</span>

@@ -1,5 +1,8 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import auth from "../../../firebase.init";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -7,6 +10,12 @@ const Navbar = () => {
 	//login page navigate
 	const handleLoginBtn = () => {
 		navigate("/login");
+	};
+
+	const [user] = useAuthState(auth);
+
+	const handleSignOut = () => {
+		signOut(auth);
 	};
 	return (
 		<nav
@@ -125,49 +134,49 @@ const Navbar = () => {
 						</li>
 					</ul>
 				</div>
-
-				<button
-					onClick={handleLoginBtn}
-					className="bg-blue-700 text-white px-4 py-1 rounded hover:text-amber-500"
-				>
-					Login
-				</button>
-
-				{/* <div className="flex justify-center">
-					<div>
-						<div className="dropdown relative">
-							<button
-								className="
+				{!user ? (
+					<button
+						onClick={handleLoginBtn}
+						className="bg-blue-700 text-white px-4 py-1 rounded hover:text-amber-500"
+					>
+						Login
+					</button>
+				) : (
+					<div className="flex justify-center">
+						<div>
+							<div className="dropdown relative">
+								<button
+									className="
 										dropdown-toggle
 										px-4 py-1.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out
 										flex
 										items-center
 										whitespace-nowrap
 									"
-								type="button"
-								id="dropdownMenuSmallButton"
-								data-bs-toggle="dropdown"
-								aria-expanded="false"
-							>
-								user name
-								<svg
-									aria-hidden="true"
-									focusable="false"
-									data-prefix="fas"
-									data-icon="caret-down"
-									className="w-2 ml-2"
-									role="img"
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 320 512"
+									type="button"
+									id="dropdownMenuSmallButton"
+									data-bs-toggle="dropdown"
+									aria-expanded="false"
 								>
-									<path
-										fill="currentColor"
-										d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-									></path>
-								</svg>
-							</button>
-							<ul
-								className="
+									{user.displayName}
+									<svg
+										aria-hidden="true"
+										focusable="false"
+										data-prefix="fas"
+										data-icon="caret-down"
+										className="w-2 ml-2"
+										role="img"
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 320 512"
+									>
+										<path
+											fill="currentColor"
+											d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+										></path>
+									</svg>
+								</button>
+								<ul
+									className="
 										dropdown-menu
 										min-w-max
 										absolute
@@ -187,12 +196,12 @@ const Navbar = () => {
 										bg-clip-padding
 										border-none
 									"
-								aria-labelledby="dropdownMenuSmallButton"
-							>
-								<li>
-									<Link
-										to={"/"}
-										className="
+									aria-labelledby="dropdownMenuSmallButton"
+								>
+									<li>
+										<Link
+											to={"/"}
+											className="
 												dropdown-item
 												text-sm
 												py-2
@@ -205,14 +214,14 @@ const Navbar = () => {
 												text-gray-700
 												hover:bg-gray-100
           "
-									>
-										Action
-									</Link>
-								</li>
-								<li>
-									<Link
-										to={"/myitems"}
-										className="
+										>
+											Action
+										</Link>
+									</li>
+									<li>
+										<Link
+											to={"/myitems"}
+											className="
 												dropdown-item
 												text-sm
 												py-2
@@ -225,13 +234,14 @@ const Navbar = () => {
 												text-gray-700
 												hover:bg-gray-100
 											"
-									>
-										My items
-									</Link>
-								</li>
-								<li>
-									<span
-										className="
+										>
+											My items
+										</Link>
+									</li>
+									<li>
+										<span
+											onClick={handleSignOut}
+											className="
             dropdown-item
             text-sm
             py-2
@@ -245,14 +255,15 @@ const Navbar = () => {
             hover:bg-gray-100
             cursor-pointer
           "
-									>
-										Logout
-									</span>
-								</li>
-							</ul>
+										>
+											Logout
+										</span>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
-				</div> */}
+				)}
 
 				{/* <!-- Right elements --> */}
 			</div>

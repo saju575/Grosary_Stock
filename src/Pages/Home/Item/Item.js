@@ -1,9 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Item = (props) => {
-	const { img, name, price, supplierName, quantity } = props.item;
+	const { _id, img, name, price, supplierName, quantity } = props.item;
 	//handle Update stock
-	const handleUpdateStock = () => {};
+	const navigate = useNavigate();
+	const handleUpdateStock = () => {
+		const url = `/inventory/${_id}`;
+		navigate(url);
+	};
 	return (
 		<div className="flex justify-center ">
 			<div className="rounded shadow-lg bg-gray-50 relative">

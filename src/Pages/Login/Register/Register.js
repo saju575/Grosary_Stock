@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
 	useCreateUserWithEmailAndPassword,
 	useSignInWithGoogle,
@@ -21,6 +21,8 @@ const Register = () => {
 
 	//navigate function
 	const navigate = useNavigate();
+	const location = useLocation();
+	const from = location.state?.from?.pathname || "/";
 
 	const [createUserWithEmailAndPassword, user, loadding, error] =
 		useCreateUserWithEmailAndPassword(auth, {
@@ -83,11 +85,11 @@ const Register = () => {
 	};
 	//console.log(values);
 	//navigate
-	// useEffect(() => {
-	// 	if (user || userg) {
-	// 		navigate("/");
-	// 	}
-	// }, [user, userg, navigate]);
+	useEffect(() => {
+		if (user || userg) {
+			navigate(from, { replace: true });
+		}
+	}, [user, userg, navigate, from]);
 
 	//create user function
 	const handleCreateUser = async (e) => {
@@ -139,7 +141,7 @@ const Register = () => {
 				>
 					Register
 				</button>
-				{/* <p>{error ? error.message : ""}</p> */}
+				<p>{error ? error.message : ""}</p>
 				<p className="text-gray-800 mt-6 text-center">
 					Already have an account ?{" "}
 					<Link
