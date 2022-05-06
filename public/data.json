@@ -1,0 +1,56 @@
+[
+	{
+		"_id": 1,
+		"name": "Blue milk",
+		"img": "./img/1.png",
+		"price": 200,
+		"quantity": 5,
+		"discription": "This is the no 1 milk powder in bd",
+		"supplierName": "Anchor"
+	},
+	{
+		"_id": 2,
+		"name": "Caster suger",
+		"img": "./img/2.png",
+		"price": 250,
+		"quantity": 10,
+		"discription": "This is the no 1 suger in bd",
+		"supplierName": "Caster"
+	},
+	{
+		"_id": 3,
+		"name": "White Rice",
+		"img": "./img/3.png",
+		"price": 200,
+		"quantity": 4,
+		"discription": "This is the no 1 rice in bd",
+		"supplierName": "Anchor"
+	},
+	{
+		"_id": 4,
+		"name": "Fress oil",
+		"img": "./img/4.png",
+		"price": 500,
+		"quantity": 5,
+		"discription": "This is the no 1 oil in bd",
+		"supplierName": "Fress"
+	},
+	{
+		"_id": 5,
+		"name": "Termaric powder",
+		"img": "./img/5.png",
+		"price": 70,
+		"quantity": 8,
+		"discription": "This is the no 1 termaric powder in bd",
+		"supplierName": "Raduni"
+	},
+	{
+		"_id": 6,
+		"name": "Brown Atta",
+		"img": "./img/6.png",
+		"price": 100,
+		"quantity": 9,
+		"discription": "This is the no 1 brown atta in bd",
+		"supplierName": "ACI"
+	}
+]
