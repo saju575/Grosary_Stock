@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./Pages/Common/Footer/Footer";
 import Navbar from "./Pages/Common/Navbar/Navbar";
+import Error from "./Pages/Error/Error";
 import Home from "./Pages/Home/Home/Home";
 import Inventory from "./Pages/Inventory/Inventory";
 import Login from "./Pages/Login/Login/Login";
@@ -33,6 +34,7 @@ function App() {
 						</RequireAuth>
 					}
 				></Route>
+				<Route path="*" element={<Error />}></Route>
 			</Routes>
 			<Footer />
 		</div>
