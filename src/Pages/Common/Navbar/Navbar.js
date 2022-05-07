@@ -220,7 +220,7 @@ const Navbar = () => {
 									</li>
 									<li>
 										<Link
-											to={"/myitems"}
+											to={"/myaddproducts"}
 											className="
 												dropdown-item
 												text-sm
