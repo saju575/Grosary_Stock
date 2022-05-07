@@ -5,7 +5,9 @@ import Item from "../Item/Item";
 const TopItems = () => {
 	const [items, setItems] = useState([]);
 	useEffect(() => {
-		axios.get("data.json").then((data) => setItems(data.data));
+		axios
+			.get("http://localhost:5000/products?size=6")
+			.then((data) => setItems(data.data));
 	}, []);
 
 	return (
