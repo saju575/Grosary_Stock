@@ -23,7 +23,7 @@ const SingleItemInfo = () => {
 		axios.get(url).then((data) => setItem(data.data));
 	}, [id]);
 	useEffect(() => {
-		setNewQ(quantity);
+		setNewQ(parseInt(quantity));
 	}, [quantity]);
 
 	//handle Modal show
@@ -104,7 +104,7 @@ const SingleItemInfo = () => {
 									setValues({ update: true, deliver: false });
 								}}
 								type="button"
-								className="inline-block px-6 py-2.5 bg-yellow-500 text-white  text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out font-bold"
+								className="inline-block px-6 py-2.5 mx-2 bg-yellow-500 text-white  text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-600 hover:shadow-lg focus:bg-yellow-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-700 active:shadow-lg transition duration-150 ease-in-out font-bold"
 							>
 								stock update
 							</button>
@@ -114,7 +114,7 @@ const SingleItemInfo = () => {
 									setValues({ update: false, deliver: true });
 								}}
 								type="button"
-								className="inline-block px-6 py-2.5 bg-purple-600 text-white font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+								className="mx-3 inline-block px-6 py-2.5 bg-purple-600 text-white font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
 							>
 								Deliver
 							</button>

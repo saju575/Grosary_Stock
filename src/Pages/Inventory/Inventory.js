@@ -5,6 +5,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ConfirmModal from "../SmallComponents/ConfirmModal/ConfirmModal";
+import Spinner from "../SmallComponents/Spinner/Spinner";
 import TableRowItem from "./TableRowItem";
 
 const Inventory = () => {
@@ -98,17 +99,21 @@ const Inventory = () => {
 											</th>
 										</tr>
 									</thead>
-									<tbody>
-										{items.map((item) => (
-											<TableRowItem
-												key={item._id}
-												item={item}
-												handleDeleteOparation={
-													handleDeleteOparation
-												}
-											/>
-										))}
-									</tbody>
+									{items ? (
+										<tbody>
+											{items.map((item) => (
+												<TableRowItem
+													key={item._id}
+													item={item}
+													handleDeleteOparation={
+														handleDeleteOparation
+													}
+												/>
+											))}
+										</tbody>
+									) : (
+										<Spinner />
+									)}
 								</table>
 							</div>
 						</div>

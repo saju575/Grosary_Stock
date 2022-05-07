@@ -1,9 +1,12 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const AddProduct = () => {
 	const [user] = useAuthState(auth);
+	const navigate = useNavigate();
 	const [product, setProduct] = useState({
 		name: "",
 		img: "",
@@ -18,10 +21,16 @@ const AddProduct = () => {
 		setProduct({ ...product, [e.target.name]: e.target.value });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const result = await axios.post("http://localhost:5000/products", {
+			...product,
+		});
+		if (result.data) {
+			navigate("/inventory");
+		}
 
-		//console.log(product);
+		console.log(result.data);
 	};
 
 	return (
