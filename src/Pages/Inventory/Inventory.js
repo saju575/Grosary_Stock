@@ -10,8 +10,8 @@ const Inventory = () => {
 			.then((data) => setItems(data.data));
 	}, []);
 	return (
-		<div style={{ backgroundColor: "#F7F7F9" }}>
-			<div className="container mx-auto">
+		<div style={{ backgroundColor: "#F7F7F9", minHeight: "80vh" }}>
+			<div className="container mx-auto pt-10">
 				<div className="flex flex-col">
 					<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 						<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
