@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams } from "react-router-dom";
+import auth from "../../firebase.init";
 import Modal from "../SmallComponents/Modal/Modal";
 
 const SingleItemInfo = () => {
@@ -9,6 +11,8 @@ const SingleItemInfo = () => {
 	const { id } = useParams();
 	const { name, quantity, price, img, supplierName, discription } = item;
 	const [newQ, setNewQ] = useState(0);
+
+	const [user] = useAuthState(auth);
 
 	const [values, setValues] = useState({
 		deliver: false,
@@ -35,13 +39,35 @@ const SingleItemInfo = () => {
 			const result = axios.put(`http://localhost:5000/products/${id}`, {
 				quantity: q,
 			});
+			const sellItem = {
+				productId: id,
+				productName: name,
+				quantity: qInput,
+				deliverUser: user.email,
+			};
+			const selResult = axios.put("http://localhost:5000/sellProducts", {
+				...sellItem,
+			});
 		} else {
 			//show toast
 		}
 		//console.log("deliver", q);
 		//console.log(quantity);
 	};
-	const handleUpdateStock = (quantity) => {
+	const handleUpdateStock = (qInput) => {
+		const q = parseInt(qInput) + newQ;
+		setNewQ(q);
+		const result = axios.put(`http://localhost:5000/products/${id}`, {
+			quantity: q,
+		});
+
+		// const adderInfo = {
+		// 	productId: id,
+		// 	productName: name,
+		// 	quantity: qInput,
+
+		// 	deliverUser: user.email,
+		// };
 		//setShowModal(true);
 		//console.log("update", parseInt(quantity));
 	};
