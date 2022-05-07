@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddProduct from "./Pages/AddProduct/AddProduct";
 import Footer from "./Pages/Common/Footer/Footer";
 import Navbar from "./Pages/Common/Navbar/Navbar";
 import Error from "./Pages/Error/Error";
@@ -31,6 +32,14 @@ function App() {
 					element={
 						<RequireAuth>
 							<SingleItemInfo />
+						</RequireAuth>
+					}
+				></Route>
+				<Route
+					path="/addProduct"
+					element={
+						<RequireAuth>
+							<AddProduct />
 						</RequireAuth>
 					}
 				></Route>
