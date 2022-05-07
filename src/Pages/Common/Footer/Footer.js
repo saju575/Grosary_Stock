@@ -27,7 +27,8 @@ const Footer = () => {
 			</div> */}
 			<div className="flex justify-center py-8 border-t-2">
 				<p>
-					© {new Date().getFullYear()} Educator, All Rights Reserved
+					© {new Date().getFullYear()} Grosery Stock, All Rights
+					Reserved
 				</p>
 			</div>
 		</div>
