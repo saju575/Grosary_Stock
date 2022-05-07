@@ -1,14 +1,41 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import ConfirmModal from "../SmallComponents/ConfirmModal/ConfirmModal";
 import TableRowItem from "./TableRowItem";
 
 const Inventory = () => {
 	const [items, setItems] = useState([]);
+	const [confirm, setConfirm] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [id, setId] = useState("");
 	useEffect(() => {
 		axios
 			.get("http://localhost:5000/products")
 			.then((data) => setItems(data.data));
 	}, []);
+	//console.log(confirm);
+	//delete opration
+	const handleDeleteOparation = (id) => {
+		setShowModal(true);
+		setId(id);
+		// const result = await axios.delete(
+		// 	`http://localhost:5000/products/${id}`
+		// );
+		// console.log(result);
+	};
+	useEffect(async () => {
+		if (confirm) {
+			const result = await axios.delete(
+				`http://localhost:5000/products/${id}`
+			);
+			if (result.data.deletedCount) {
+				const restData = items.filter((item) => item._id !== id);
+				setItems(restData);
+				setConfirm(false);
+			}
+		}
+	}, [confirm, id, items]);
 	return (
 		<div style={{ backgroundColor: "#F7F7F9", minHeight: "80vh" }}>
 			<div className="container mx-auto pt-10">
@@ -56,6 +83,9 @@ const Inventory = () => {
 											<TableRowItem
 												key={item._id}
 												item={item}
+												handleDeleteOparation={
+													handleDeleteOparation
+												}
 											/>
 										))}
 									</tbody>
@@ -65,6 +95,13 @@ const Inventory = () => {
 					</div>
 				</div>
 			</div>
+			{showModal && (
+				<ConfirmModal
+					showModal={showModal}
+					setShowModal={setShowModal}
+					setConfirm={setConfirm}
+				/>
+			)}
 		</div>
 	);
 };

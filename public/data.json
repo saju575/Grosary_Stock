@@ -2,7 +2,7 @@
 	{
 		"_id": 1,
 		"name": "Blue milk",
-		"img": "./img/1.png",
+		"img": "https://i.ibb.co/TtVc8Cp/1.png",
 		"price": 350,
 		"quantity": 5,
 		"discription": "Full Cream Milk powder with pure fresh homogenized.Pasteurize cow's milk and prime quality.Water has been removed .Special spray process.Natural food elements are preserved.",
@@ -52,5 +52,14 @@
 		"quantity": 9,
 		"discription": "This is the no 1 brown atta in bd",
 		"supplierName": "ACI"
+	},
+	{
+		"_id": { "$oid": "6275b20f8114f73814d96469" },
+		"name": "Fresh oil",
+		"img": "https://i.ibb.co/qY6tXwb/4.png",
+		"price": { "$numberInt": "500" },
+		"quantity": { "$numberInt": "5" },
+		"discription": "Super Fresh Soyabean Oil, Super Pure Vegetable Oil. It follows 3 steps of refining process-Perfect Degumming & Neutralization, Balanced De-colorization and Five steps Deodorization to ensure right ratio of Omega 3 & 6 and intact Beta-carotene in Soyabean Oil.",
+		"supplierName": "Fresh"
 	}
 ]
