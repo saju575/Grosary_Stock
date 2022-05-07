@@ -88,11 +88,12 @@ const Navbar = () => {
 						to={"/"}
 					>
 						<img
-							src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.png"
+							src="https://i.ibb.co/ZSW09Bv/grocery.png"
 							style={{ height: "15px" }}
 							alt=""
 							loading="lazy"
-						/>
+						/>{" "}
+						<span className="font-bold">Grosery Stock</span>
 					</NavLink>
 					{/* <!-- Left links --> */}
 					<ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
@@ -200,7 +201,7 @@ const Navbar = () => {
 								>
 									<li>
 										<Link
-											to={"/"}
+											to={"/addProduct"}
 											className="
 												dropdown-item
 												text-sm
@@ -215,7 +216,7 @@ const Navbar = () => {
 												hover:bg-gray-100
           "
 										>
-											Action
+											Add product
 										</Link>
 									</li>
 									<li>
@@ -239,22 +240,42 @@ const Navbar = () => {
 										</Link>
 									</li>
 									<li>
+										<Link
+											to={"/inventory"}
+											className="
+												dropdown-item
+												text-sm
+												py-2
+												px-4
+												font-normal
+												block
+												w-full
+												whitespace-nowrap
+												bg-transparent
+												text-gray-700
+												hover:bg-gray-100
+											"
+										>
+											Manage Items
+										</Link>
+									</li>
+									<li>
 										<span
 											onClick={handleSignOut}
 											className="
-            dropdown-item
-            text-sm
-            py-2
-            px-4
-            font-normal
-            block
-            w-full
-            whitespace-nowrap
-            bg-transparent
-            text-gray-700
-            hover:bg-gray-100
-            cursor-pointer
-          "
+												dropdown-item
+												text-sm
+												py-2
+												px-4
+												font-normal
+												block
+												w-full
+												whitespace-nowrap
+												bg-transparent
+												text-gray-700
+												hover:bg-gray-100
+												cursor-pointer
+         									"
 										>
 											Logout
 										</span>

@@ -76,6 +76,18 @@ const Myitems = () => {
 										>
 											Supplier
 										</th>
+										<th
+											scope="col"
+											className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+										>
+											Username
+										</th>
+										<th
+											scope="col"
+											className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+										>
+											Delete
+										</th>
 									</tr>
 								</thead>
 								{items ? (

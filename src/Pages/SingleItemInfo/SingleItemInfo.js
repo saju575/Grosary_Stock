@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import auth from "../../firebase.init";
 import Modal from "../SmallComponents/Modal/Modal";
 
@@ -135,6 +135,15 @@ const SingleItemInfo = () => {
 					setShowModal={setShowModal}
 				></Modal>
 			)}
+			<div className="flex justify-end pt-6 mr-5">
+				<Link
+					to={"/inventory"}
+					className="inline-block px-6 py-2.5 bg-transparent text-blue-600 font-medium text-lg leading-tight uppercase rounded hover:underline  focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out cursor-pointer"
+				>
+					Manage Inventories{" "}
+					<i className="fa-solid fa-arrow-right-long"></i>
+				</Link>
+			</div>
 		</div>
 	);
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
 const MyItemRow = (props) => {
-	const { _id, name, quantity, price, img, supplierName, userName } =
+	const { _id, name, quantity, price, img, supplierName, username } =
 		props.item;
 	const { handleDeleteOparation } = props;
 	return (
@@ -22,20 +22,18 @@ const MyItemRow = (props) => {
 				{supplierName}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-				{userName}
+				{username}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-				<div className="flex items-center justify-evenly mt-3">
-					<button
-						onClick={() => {
-							handleDeleteOparation(_id);
-						}}
-						type="button"
-						className="inline-block px-6 py-2.5 bg-red-600 text-white font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
-					>
-						Delete
-					</button>
-				</div>
+				<button
+					onClick={() => {
+						handleDeleteOparation(_id);
+					}}
+					type="button"
+					className="inline-block px-6 py-2.5 bg-red-600 text-white font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
+				>
+					Delete
+				</button>
 			</td>
 		</tr>
 	);
