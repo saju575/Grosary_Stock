@@ -16,7 +16,7 @@ const Inventory = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:5000/products")
+			.get("https://intense-wave-00513.herokuapp.com/products")
 			.then((data) => setItems(data.data));
 	}, []);
 
@@ -28,7 +28,7 @@ const Inventory = () => {
 	useEffect(async () => {
 		if (confirm) {
 			const result = await axios.delete(
-				`http://localhost:5000/products/${id}`
+				`https://intense-wave-00513.herokuapp.com/products/${id}`
 			);
 			if (result.data.deletedCount) {
 				const restData = items.filter((item) => item._id !== id);

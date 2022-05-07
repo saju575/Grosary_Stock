@@ -22,20 +22,24 @@ const Summery = () => {
 	useEffect(async () => {
 		// let datas;
 		// let colors;
-		await axios.get("http://localhost:5000/products").then((data) => {
-			setProducts(data.data);
-			const datas = data.data.map((item) => {
-				return { name: item.name, value: parseInt(item.quantity) };
+		await axios
+			.get("https://intense-wave-00513.herokuapp.com/products")
+			.then((data) => {
+				setProducts(data.data);
+				const datas = data.data.map((item) => {
+					return { name: item.name, value: parseInt(item.quantity) };
+				});
+				const colors = data.data.map(() => RandomColor());
+				setData(datas);
+				setColor(colors);
 			});
-			const colors = data.data.map(() => RandomColor());
-			setData(datas);
-			setColor(colors);
-		});
 	}, []);
 	useEffect(async () => {
-		await axios.get("http://localhost:5000/sellProducts").then((data) => {
-			setSell(data.data);
-		});
+		await axios
+			.get("https://intense-wave-00513.herokuapp.com/sellProducts")
+			.then((data) => {
+				setSell(data.data);
+			});
 	}, []);
 	//extra
 
@@ -100,7 +104,7 @@ const Summery = () => {
 							<h2 className="text-center my-6 font-bold">
 								Product vs Quantity PieChart
 							</h2>
-							<PieChart width={400} height={300}>
+							<PieChart width={700} height={400}>
 								<Pie
 									data={data}
 									cx="50%"

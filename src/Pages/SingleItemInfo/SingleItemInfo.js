@@ -19,7 +19,7 @@ const SingleItemInfo = () => {
 		update: false,
 	});
 	useEffect(() => {
-		const url = `http://localhost:5000/products/${id}`;
+		const url = `https://intense-wave-00513.herokuapp.com/products/${id}`;
 		axios.get(url).then((data) => setItem(data.data));
 	}, [id]);
 	useEffect(() => {
@@ -36,18 +36,24 @@ const SingleItemInfo = () => {
 
 			setNewQ(q);
 
-			const result = axios.put(`http://localhost:5000/products/${id}`, {
-				quantity: q,
-			});
+			const result = axios.put(
+				`https://intense-wave-00513.herokuapp.com/products/${id}`,
+				{
+					quantity: q,
+				}
+			);
 			const sellItem = {
 				productId: id,
 				productName: name,
 				quantity: qInput,
 				deliverUser: user.email,
 			};
-			const selResult = axios.put("http://localhost:5000/sellProducts", {
-				...sellItem,
-			});
+			const selResult = axios.put(
+				"https://intense-wave-00513.herokuapp.com/sellProducts",
+				{
+					...sellItem,
+				}
+			);
 		} else {
 			//show toast
 		}
@@ -57,9 +63,12 @@ const SingleItemInfo = () => {
 	const handleUpdateStock = (qInput) => {
 		const q = parseInt(qInput) + newQ;
 		setNewQ(q);
-		const result = axios.put(`http://localhost:5000/products/${id}`, {
-			quantity: q,
-		});
+		const result = axios.put(
+			`https://intense-wave-00513.herokuapp.com/products/${id}`,
+			{
+				quantity: q,
+			}
+		);
 
 		// const adderInfo = {
 		// 	productId: id,

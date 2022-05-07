@@ -23,9 +23,12 @@ const AddProduct = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const result = await axios.post("http://localhost:5000/products", {
-			...product,
-		});
+		const result = await axios.post(
+			"https://intense-wave-00513.herokuapp.com/products",
+			{
+				...product,
+			}
+		);
 		if (result.data) {
 			navigate("/inventory");
 		}

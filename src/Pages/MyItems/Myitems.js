@@ -14,7 +14,9 @@ const Myitems = () => {
 	const [user] = useAuthState(auth);
 	useEffect(() => {
 		axios
-			.get(`http://localhost:5000/addedProducts/${user.displayName}`)
+			.get(
+				`https://intense-wave-00513.herokuapp.com/addedProducts/${user.displayName}`
+			)
 			.then((data) => setItems(data.data));
 	}, [user.displayName]);
 
@@ -26,7 +28,7 @@ const Myitems = () => {
 	useEffect(async () => {
 		if (confirm) {
 			const result = await axios.delete(
-				`http://localhost:5000/products/${id}`
+				`https://intense-wave-00513.herokuapp.com/products/${id}`
 			);
 			if (result.data.deletedCount) {
 				const restData = items.filter((item) => item._id !== id);

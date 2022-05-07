@@ -9,7 +9,7 @@ const TopItems = () => {
 	const [items, setItems] = useState([]);
 	useEffect(() => {
 		axios
-			.get("http://localhost:5000/products?size=6")
+			.get("https://intense-wave-00513.herokuapp.com/products?size=6")
 			.then((data) => setItems(data.data));
 	}, []);
 
