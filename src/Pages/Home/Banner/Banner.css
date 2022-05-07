@@ -1,0 +1,19 @@
+.banner {
+	background: linear-gradient(
+			rgba(75, 75, 75, 0.4),
+			rgba(75, 75, 75, 0.8),
+			rgba(61, 61, 61, 0.8)
+		),
+		url("https://i.ibb.co/s1fK99w/banner.jpg") no-repeat;
+	background-position: center;
+	background-size: cover;
+	height: 70vh;
+}
+.b-p {
+	font-family: "Caveat", cursive;
+	color: white;
+}
+.b-l {
+	font-family: "Concert One", cursive;
+	color: white;
+}
