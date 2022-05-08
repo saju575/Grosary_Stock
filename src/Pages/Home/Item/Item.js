@@ -12,7 +12,12 @@ const Item = (props) => {
 	return (
 		<div className="flex justify-center ">
 			<div className="rounded shadow-lg bg-gray-50 relative">
-				<img className="rounded-t-lg" src={img} alt="product" />
+				<img
+					className="rounded-t-lg"
+					src={img}
+					alt="product"
+					style={{ width: "300px" }}
+				/>
 
 				<div className="p-6">
 					<h5 className="text-gray-900 text-xl  mb-2 font-bold">
