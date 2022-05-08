@@ -32,8 +32,6 @@ const AddProduct = () => {
 		if (result.data) {
 			navigate("/inventory");
 		}
-
-		console.log(result.data);
 	};
 
 	return (

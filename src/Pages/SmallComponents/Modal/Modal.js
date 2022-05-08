@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function Modal(props) {
 	//const [showModal, setShowModal] = React.useState(false);
-	const { showModal, setShowModal, handleDeliverQuantity } = props;
+	const { showModal, setShowModal, handleDeliverQuantity, header } = props;
 	const [quantity, setQuantity] = useState(0);
 
 	return (
@@ -16,7 +16,7 @@ export default function Modal(props) {
 								{/*header*/}
 								<div className="flex items-center justify-between p-5 border-b border-solid border-slate-200 rounded-t">
 									<h3 className="text-2xl font-semibold text-blue-500">
-										Increase Quantity
+										{header}
 									</h3>
 									<button
 										type="button"

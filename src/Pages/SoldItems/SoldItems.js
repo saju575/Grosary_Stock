@@ -1,28 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../../firebase.init";
 import ConfirmModal from "../SmallComponents/ConfirmModal/ConfirmModal";
 import Spinner from "../SmallComponents/Spinner/Spinner";
-import MyItemRow from "./MyItemRow";
+import SoldSingleItem from "./SoldSingleItem";
 
-const Myitems = () => {
-	const [items, setItems] = useState([]);
+const SoldItems = () => {
+	const [products, setProducts] = useState([]);
 	const [confirm, setConfirm] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [id, setId] = useState("");
-	const [user] = useAuthState(auth);
-	useEffect(() => {
-		axios
-			.get(
-				`https://intense-wave-00513.herokuapp.com/addedProducts/${user.displayName}`
-			)
-			.then((data) => {
-				setItems(data.data);
-			});
-	}, [user.displayName]);
-
-	//delete opration
+	useEffect(async () => {
+		await axios.get("http://localhost:5000/soldProducts").then((data) => {
+			setProducts(data.data);
+			console.log(data);
+		});
+	}, []);
+	//delete item
 	const handleDeleteOparation = (id) => {
 		setShowModal(true);
 		setId(id);
@@ -30,20 +23,21 @@ const Myitems = () => {
 	useEffect(async () => {
 		if (confirm) {
 			const result = await axios.delete(
-				`https://intense-wave-00513.herokuapp.com/products/${id}`
+				`http://localhost:5000/soldProducts/${id}`
 			);
 			if (result.data.deletedCount) {
-				const restData = items.filter((item) => item._id !== id);
-				setItems(restData);
+				const restData = products.filter((item) => item._id !== id);
+				setProducts(restData);
 				setConfirm(false);
 			}
 		}
-	}, [confirm, id, items]);
-
+	}, [confirm, id, products]);
 	return (
-		<div className="container mx-auto py-10" style={{ minHeight: "80vh" }}>
-			<h1 className="text-lg uppercase mb-8">My added items</h1>
-			{items?.length ? (
+		<div className="container mx-auto py-12" style={{ minHeight: "80vh" }}>
+			<h2 className="uppercase sm:text-3xl font-bold mb-14">
+				Sold product details
+			</h2>
+			{products?.length ? (
 				<div className="flex flex-col">
 					<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 						<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -73,13 +67,7 @@ const Myitems = () => {
 												scope="col"
 												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
 											>
-												Unit Price
-											</th>
-											<th
-												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
-											>
-												Supplier
+												Email
 											</th>
 											<th
 												scope="col"
@@ -91,14 +79,26 @@ const Myitems = () => {
 												scope="col"
 												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
 											>
+												Date
+											</th>
+											<th
+												scope="col"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+											>
+												Time
+											</th>
+											<th
+												scope="col"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+											>
 												Delete
 											</th>
 										</tr>
 									</thead>
 
 									<tbody>
-										{items.map((item) => (
-											<MyItemRow
+										{products.map((item) => (
+											<SoldSingleItem
 												key={item._id}
 												item={item}
 												handleDeleteOparation={
@@ -115,7 +115,6 @@ const Myitems = () => {
 			) : (
 				<Spinner />
 			)}
-
 			{showModal && (
 				<ConfirmModal
 					showModal={showModal}
@@ -127,4 +126,4 @@ const Myitems = () => {
 	);
 };
 
-export default Myitems;
+export default SoldItems;

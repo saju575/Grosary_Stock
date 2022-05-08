@@ -14,6 +14,7 @@ import Myitems from "./Pages/MyItems/Myitems";
 import SingleItemInfo from "./Pages/SingleItemInfo/SingleItemInfo";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import SoldItems from "./Pages/SoldItems/SoldItems";
 
 function App() {
 	return (
@@ -29,6 +30,14 @@ function App() {
 					element={
 						<RequireAuth>
 							<Inventory />
+						</RequireAuth>
+					}
+				></Route>
+				<Route
+					path="/solditems"
+					element={
+						<RequireAuth>
+							<SoldItems />
 						</RequireAuth>
 					}
 				></Route>

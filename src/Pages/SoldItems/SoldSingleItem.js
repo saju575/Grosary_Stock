@@ -1,42 +1,40 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const TableRowItem = (props) => {
-	const { _id, name, quantity, price, img, supplierName } = props.item;
+const SoldSingleItem = (props) => {
+	const {
+		_id,
+		productName,
+		quantity,
+		img,
+		deliverUser,
+		username,
+		date,
+		time,
+	} = props.item;
+
 	const { handleDeleteOparation } = props;
-	const navigate = useNavigate();
-	const handleBtn = () => {
-		navigate(`/inventory/${_id}`);
-	};
-
 	return (
 		<tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
 			<td className="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
 				<img src={img} alt="" className="w-12 h-12" />
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-				{name}
+				{productName}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
 				{quantity}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-				{price}
+				{deliverUser}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-				{supplierName}
+				{username}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-				<div className="flex items-center justify-evenly mt-3">
-					<button onClick={handleBtn} type="button">
-						<i className="fa-solid fa-square-plus text-green-500 text-3xl -mt-2"></i>
-					</button>
-				</div>
+				{date}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
-				<button onClick={handleBtn} type="button">
-					<i className="fa-solid fa-cart-flatbed text-purple-600 text-xl"></i>
-				</button>
+				{time}
 			</td>
 			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
 				<button
@@ -52,4 +50,4 @@ const TableRowItem = (props) => {
 	);
 };
 
-export default TableRowItem;
+export default SoldSingleItem;

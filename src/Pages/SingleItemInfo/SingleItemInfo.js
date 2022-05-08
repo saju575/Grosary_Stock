@@ -1,7 +1,9 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Modal from "../SmallComponents/Modal/Modal";
 
@@ -29,41 +31,51 @@ const SingleItemInfo = () => {
 	//handle Modal show
 	//console.log(newQ);
 	//handle deleverQuntity
-	const handleDeliverQuantity = (qInput) => {
+	const handleDeliverQuantity = async (qInput) => {
 		//setShowModal(true);
 		if (parseInt(qInput) <= newQ) {
 			const q = newQ - parseInt(qInput);
 
 			setNewQ(q);
 
-			const result = axios.put(
+			const result = await axios.put(
 				`https://intense-wave-00513.herokuapp.com/products/${id}`,
 				{
 					quantity: q,
 				}
 			);
+
 			const sellItem = {
+				img: img,
 				productId: id,
 				productName: name,
-				quantity: qInput,
+				quantity: parseInt(qInput),
 				deliverUser: user.email,
 			};
-			const selResult = axios.put(
+			const selResult = await axios.put(
 				"https://intense-wave-00513.herokuapp.com/sellProducts",
 				{
 					...sellItem,
 				}
 			);
+
+			const sold = {
+				...sellItem,
+				username: user.displayName,
+				date: new Date().toLocaleDateString(),
+				time: new Date().toLocaleTimeString(),
+			};
+			await axios.post("http://localhost:5000/soldProducts", { ...sold });
 		} else {
-			//show toast
+			toast("Not enough items left");
 		}
 		//console.log("deliver", q);
 		//console.log(quantity);
 	};
-	const handleUpdateStock = (qInput) => {
+	const handleUpdateStock = async (qInput) => {
 		const q = parseInt(qInput) + newQ;
 		setNewQ(q);
-		const result = axios.put(
+		const result = await axios.put(
 			`https://intense-wave-00513.herokuapp.com/products/${id}`,
 			{
 				quantity: q,
@@ -133,12 +145,14 @@ const SingleItemInfo = () => {
 			</div>
 			{values.deliver ? (
 				<Modal
+					header={"Deliver Items"}
 					handleDeliverQuantity={handleDeliverQuantity}
 					showModal={showModal}
 					setShowModal={setShowModal}
 				></Modal>
 			) : (
 				<Modal
+					header={"Increase Items"}
 					handleDeliverQuantity={handleUpdateStock}
 					showModal={showModal}
 					setShowModal={setShowModal}
