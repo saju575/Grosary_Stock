@@ -50,17 +50,20 @@ const Myitems = () => {
 		setShowModal(true);
 		setId(id);
 	};
-	useEffect(async () => {
-		if (confirm) {
-			const result = await axios.delete(
-				`https://intense-wave-00513.herokuapp.com/products/${id}`
-			);
-			if (result.data.deletedCount) {
-				const restData = items.filter((item) => item._id !== id);
-				setItems(restData);
-				setConfirm(false);
+	useEffect(() => {
+		const de = async () => {
+			if (confirm) {
+				const result = await axios.delete(
+					`https://intense-wave-00513.herokuapp.com/products/${id}`
+				);
+				if (result?.data.deletedCount) {
+					const restData = items.filter((item) => item._id !== id);
+					setItems(restData);
+					setConfirm(false);
+				}
 			}
-		}
+		};
+		de();
 	}, [confirm, id, items]);
 
 	return (

@@ -9,30 +9,35 @@ const SoldItems = () => {
 	const [confirm, setConfirm] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 	const [id, setId] = useState("");
-	useEffect(async () => {
-		await axios
-			.get("https://intense-wave-00513.herokuapp.com/soldProducts")
-			.then((data) => {
-				setProducts(data.data);
-				console.log(data);
-			});
+	useEffect(() => {
+		const i = async () => {
+			await axios
+				.get("https://intense-wave-00513.herokuapp.com/soldProducts")
+				.then((data) => {
+					setProducts(data.data);
+				});
+		};
+		i();
 	}, []);
 	//delete item
 	const handleDeleteOparation = (id) => {
 		setShowModal(true);
 		setId(id);
 	};
-	useEffect(async () => {
-		if (confirm) {
-			const result = await axios.delete(
-				`https://intense-wave-00513.herokuapp.com/soldProducts/${id}`
-			);
-			if (result.data.deletedCount) {
-				const restData = products.filter((item) => item._id !== id);
-				setProducts(restData);
-				setConfirm(false);
+	useEffect(() => {
+		const de = async () => {
+			if (confirm) {
+				const result = await axios.delete(
+					`https://intense-wave-00513.herokuapp.com/soldProducts/${id}`
+				);
+				if (result?.data.deletedCount) {
+					const restData = products.filter((item) => item._id !== id);
+					setProducts(restData);
+					setConfirm(false);
+				}
 			}
-		}
+		};
+		de();
 	}, [confirm, id, products]);
 	return (
 		<div className="container mx-auto py-12" style={{ minHeight: "80vh" }}>
