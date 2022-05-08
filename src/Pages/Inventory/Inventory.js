@@ -27,9 +27,9 @@ const Inventory = () => {
 		setShowModal(true);
 		setId(id);
 	};
-	useEffect(async () => {
+	useEffect(() => {
 		if (confirm) {
-			const result = await axios.delete(
+			const result = axios.delete(
 				`https://intense-wave-00513.herokuapp.com/products/${id}`
 			);
 			if (result.data.deletedCount) {
@@ -45,22 +45,28 @@ const Inventory = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div style={{ backgroundColor: "#F7F7F9", minHeight: "80vh" }}>
+		<div
+			className="pt-8"
+			style={{ backgroundColor: "#F7F7F9", minHeight: "80vh" }}
+		>
+			<h2 className="text-center text-gray-500 text-2xl uppercase mb-3">
+				Manage Items
+			</h2>
 			{items?.length ? (
-				<div className="container mx-auto pt-10">
+				<div className="container mx-auto py-5">
 					<div className="flex justify-end">
 						<button
 							onClick={() => {
 								navigate("/addProduct");
 							}}
 							type="button"
-							className="inline-block px-6 py-2.5 bg-purple-600 text-white font-bold text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
+							className="mb-5 inline-block px-6 py-2.5 bg-gray-500 text-white  text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-700 hover:shadow-lg focus:bg-gray-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-800 active:shadow-lg transition duration-150 ease-in-out mx-1"
 						>
 							<FontAwesomeIcon
-								className="text-xl"
+								className="text-base"
 								icon={faSquarePlus}
 							></FontAwesomeIcon>{" "}
-							<span className="uppercase text-lg">
+							<span className="uppercase text-sm">
 								Add product
 							</span>
 						</button>
@@ -69,54 +75,54 @@ const Inventory = () => {
 						<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 							<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 								<div className="overflow-x-auto">
-									<table className="min-w-full">
+									<table className=" min-w-full border text-center">
 										<thead className="border-b">
 											<tr>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 												>
 													Image
 												</th>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 												>
 													Name
 												</th>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 												>
 													Quantity
 												</th>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 												>
 													Unit Price
 												</th>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-ccenter border-r"
 												>
 													Supplier
 												</th>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 												>
 													Item Add
 												</th>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 												>
 													Item Deliver
 												</th>
 												<th
 													scope="col"
-													className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+													className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 												>
 													Delete
 												</th>

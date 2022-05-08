@@ -36,7 +36,7 @@ const Summery = () => {
 	}, []);
 	useEffect(async () => {
 		await axios
-			.get("https://intense-wave-00513.herokuapp.com/sellProducts")
+			.get("https://intense-wave-00513.herokuapp.com/soldProducts")
 			.then((data) => {
 				setSell(data.data);
 			});

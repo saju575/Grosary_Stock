@@ -94,7 +94,13 @@ const SingleItemInfo = () => {
 	};
 
 	return (
-		<div className="container py-20 mx-auto " style={{ minHeight: "80vh" }}>
+		<div
+			className="container py-20 mx-auto px-2"
+			style={{ minHeight: "80vh" }}
+		>
+			<h2 className="text-center text-gray-500 text-2xl uppercase mb-8">
+				Inventory
+			</h2>
 			<div className="flex justify-center">
 				<div className="flex flex-col md:flex-row md:max-w-xl rounded-lg bg-white shadow-lg">
 					<img

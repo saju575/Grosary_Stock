@@ -6,25 +6,25 @@ const MyItemRow = (props) => {
 	const { handleDeleteOparation } = props;
 	return (
 		<tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-			<td className="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900">
+			<td className="px-6 py-2 whitespace-nowrap text-sm font-medium text-gray-900 border-r">
 				<img src={img} alt="" className="w-12 h-12" />
 			</td>
-			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
 				{name}
 			</td>
-			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
 				{quantity}
 			</td>
-			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
 				{price}
 			</td>
-			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
 				{supplierName}
 			</td>
-			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
 				{username}
 			</td>
-			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
+			<td className="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap border-r">
 				<button
 					onClick={() => {
 						handleDeleteOparation(_id);

@@ -1,6 +1,8 @@
 import axios from "axios";
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import ConfirmModal from "../SmallComponents/ConfirmModal/ConfirmModal";
 import Spinner from "../SmallComponents/Spinner/Spinner";
@@ -12,14 +14,35 @@ const Myitems = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [id, setId] = useState("");
 	const [user] = useAuthState(auth);
+	const navigate = useNavigate();
 	useEffect(() => {
-		axios
-			.get(
-				`https://intense-wave-00513.herokuapp.com/addedProducts/${user.displayName}`
-			)
-			.then((data) => {
-				setItems(data.data);
-			});
+		const getItems = async () => {
+			try {
+				await axios
+					.get(
+						`https://intense-wave-00513.herokuapp.com/addedProducts/${user.email}`,
+						{
+							headers: {
+								authorization: `Bearer ${localStorage.getItem(
+									"accessToken"
+								)}`,
+							},
+						}
+					)
+					.then((data) => {
+						setItems(data.data);
+					});
+			} catch (error) {
+				if (
+					error.response.status === 401 ||
+					error.response.status === 403
+				) {
+					signOut(auth);
+					navigate("/login");
+				}
+			}
+		};
+		getItems();
 	}, [user.displayName]);
 
 	//delete opration
@@ -42,54 +65,56 @@ const Myitems = () => {
 
 	return (
 		<div className="container mx-auto py-10" style={{ minHeight: "80vh" }}>
-			<h1 className="text-lg uppercase mb-8">My added items</h1>
+			<h1 className="text-lg uppercase mb-8 text-center text-gray-500">
+				My added items
+			</h1>
 			{items?.length ? (
 				<div className="flex flex-col">
 					<div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
 						<div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
 							<div className="overflow-x-auto">
-								<table className="min-w-full">
+								<table className="min-w-full border text-center">
 									<thead className="border-b">
 										<tr>
 											<th
 												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 											>
 												Image
 											</th>
 											<th
 												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 											>
 												Name
 											</th>
 											<th
 												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 											>
 												Quantity
 											</th>
 											<th
 												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 											>
 												Unit Price
 											</th>
 											<th
 												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 											>
 												Supplier
 											</th>
 											<th
 												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 											>
 												Username
 											</th>
 											<th
 												scope="col"
-												className="text-sm font-bold text-gray-900 px-6 py-4 text-left"
+												className="text-sm font-bold text-gray-900 px-6 py-4 text-center border-r"
 											>
 												Delete
 											</th>

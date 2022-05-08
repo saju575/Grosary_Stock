@@ -30,7 +30,7 @@ const AddProduct = () => {
 			}
 		);
 		if (result.data) {
-			navigate("/inventory");
+			navigate("/manageitems");
 		}
 	};
 

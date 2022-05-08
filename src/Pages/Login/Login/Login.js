@@ -11,6 +11,7 @@ import {
 import InputField from "../InputField/InputField";
 import auth from "../../../firebase.init";
 import { toast } from "react-toastify";
+import axios from "axios";
 // import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -78,9 +79,18 @@ const Login = () => {
 			navigate(from, { replace: true });
 		}
 	}, [user, userg, navigate, from]);
-	const handleUserSignIn = (e) => {
+	//console.log(user);
+	const handleUserSignIn = async (e) => {
 		e.preventDefault();
-		signInWithEmailAndPassword(values.email, values.password);
+		await signInWithEmailAndPassword(values.email, values.password);
+		const { data } = await axios.post(
+			"https://intense-wave-00513.herokuapp.com/login",
+			{
+				email: values.email,
+			}
+		);
+		localStorage.setItem("accessToken", data.accessToken);
+		//navigate(from, { replace: true });
 	};
 
 	return (
