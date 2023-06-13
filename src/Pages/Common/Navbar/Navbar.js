@@ -148,7 +148,7 @@ const Navbar = () => {
 							</li>
 						</ul>
 					</div>
-					{!user ? (
+					{!user?.emailVerified ? (
 						<button
 							onClick={handleLoginBtn}
 							className="bg-blue-700 text-white px-4 py-1 rounded hover:text-amber-500"

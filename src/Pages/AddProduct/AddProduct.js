@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Title from "../Common/Title/Title";
 
 const AddProduct = () => {
 	const [user] = useAuthState(auth);
@@ -39,6 +40,7 @@ const AddProduct = () => {
 			className="container mx-auto flex justify-center items-center"
 			style={{ minHeight: "90vh" }}
 		>
+			<Title title={"Add Product"} />
 			<div className="block p-6 rounded-lg shadow-lg bg-white max-w-md">
 				<h3 className="text-center text-xl my-8 font-bold uppercase">
 					Add new product

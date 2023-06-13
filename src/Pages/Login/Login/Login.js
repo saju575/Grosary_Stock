@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 
 import {
@@ -11,7 +11,10 @@ import {
 import InputField from "../InputField/InputField";
 import auth from "../../../firebase.init";
 import { toast } from "react-toastify";
-import axios from "axios";
+
+import Spinner from "../../SmallComponents/Spinner/Spinner";
+import useToken from "../../../CustomHooks/useToken";
+import Title from "../../Common/Title/Title";
 // import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -23,19 +26,25 @@ const Login = () => {
 	const [err, setErr] = useState("");
 	const [signInWithEmailAndPassword, user, loading, error] =
 		useSignInWithEmailAndPassword(auth);
-	const [signInWithGoogle, userg, errorg] = useSignInWithGoogle(auth);
+	const [signInWithGoogle, userg, loadingG, errorg] =
+		useSignInWithGoogle(auth);
 	//console.log(userg);
 	// //reset password
 	const [sendPasswordResetEmail, sending, reError] =
 		useSendPasswordResetEmail(auth);
+
+	const [lAfter, setLAfter] = useState(false);
+
+	const [token] = useToken(user || userg);
 	//console.log(error.code);
 	//navigate function
 
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || "/";
-	// console.log(reError?.code);
-	// console.log(sending);
+
+	// console.log(location);
+	// console.log(from);
 	useEffect(() => {
 		setErr(reError?.code);
 	}, [reError]);
@@ -75,23 +84,26 @@ const Login = () => {
 	};
 
 	useEffect(() => {
-		if (user || userg) {
+		// setLAfter(true);
+		if (token) {
+			// setLAfter(false);
 			navigate(from, { replace: true });
 		}
-	}, [user, userg, navigate, from]);
+	}, [token, navigate, from]);
 	//console.log(user);
 	const handleUserSignIn = async (e) => {
 		e.preventDefault();
 		await signInWithEmailAndPassword(values.email, values.password);
-		const { data } = await axios.post(
-			"https://intense-wave-00513.herokuapp.com/login",
-			{
-				email: values.email,
-			}
-		);
-		localStorage.setItem("accessToken", data.accessToken);
-		//navigate(from, { replace: true });
 	};
+
+	if (loading || loadingG) {
+		return (
+			<div className="container mx-auto" style={{ minHeight: "80vh" }}>
+				<Title title={"Login"} />
+				<Spinner />
+			</div>
+		);
+	}
 
 	return (
 		//new
@@ -100,7 +112,8 @@ const Login = () => {
 			className=" form-field flex items-center justify-center "
 			style={{ minHeight: "90vh" }}
 		>
-			{/* onSubmit={handleUserSignIn} */}
+			<Title title={"Login"} />
+
 			<form className="shadow-lg p-3 rounded" onSubmit={handleUserSignIn}>
 				<h1 className="text-center mb-4 text-2xl">Login</h1>
 				{inputs.map((input) => (
@@ -139,12 +152,19 @@ const Login = () => {
 
 				<p className="text-gray-800 mt-6 text-center text-sm">
 					New to Grosery stock?{" "}
-					<Link
-						to={"/register"}
+					<span
+						onClick={() => {
+							navigate("/register");
+							// <Navigate
+							// 	to={"/register"}
+							// 	state={{ from: location }}
+							// 	replace
+							// />;
+						}}
 						className="text-orange-400 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out cursor-pointer ml-2"
 					>
 						Create new account
-					</Link>
+					</span>
 				</p>
 				<p className="text-gray-800 mt-6 text-center">
 					Forget password ?{" "}

@@ -10,6 +10,9 @@ import "./Register.css";
 import InputField from "../InputField/InputField";
 import auth from "../../../firebase.init";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
+import Spinner from "../../SmallComponents/Spinner/Spinner";
+import useToken from "../../../CustomHooks/useToken";
+import Title from "../../Common/Title/Title";
 
 const Register = () => {
 	const [values, setValues] = useState({
@@ -19,19 +22,20 @@ const Register = () => {
 		confirmPassword: "",
 	});
 
-	//navigate function
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || "/";
 
-	const [createUserWithEmailAndPassword, user, loadding, error] =
+	const [createUserWithEmailAndPassword, user, loading, error] =
 		useCreateUserWithEmailAndPassword(auth, {
 			sendEmailVerification: true,
 		});
 	//profile update
 	const [updateProfile, updating, errorP] = useUpdateProfile(auth);
 
-	const [signInWithGoogle, userg] = useSignInWithGoogle(auth);
+	const [signInWithGoogle, userg, loadingG] = useSignInWithGoogle(auth);
+
+	const [token] = useToken(user || userg);
 
 	//inputs array
 
@@ -86,10 +90,10 @@ const Register = () => {
 	//console.log(values);
 	//navigate
 	useEffect(() => {
-		if (user || userg) {
+		if (token) {
 			navigate(from, { replace: true });
 		}
-	}, [user, userg, navigate, from]);
+	}, [token, navigate, from]);
 
 	//create user function
 	const handleCreateUser = async (e) => {
@@ -101,11 +105,20 @@ const Register = () => {
 
 		await updateProfile({ displayName: values.username });
 	};
+	if (loading || loadingG) {
+		return (
+			<div className="container mx-auto" style={{ minHeight: "80vh" }}>
+				<Title title={"Register"} />
+				<Spinner />
+			</div>
+		);
+	}
 	return (
 		<div
 			className="form-field flex items-center justify-center pt-4"
 			style={{ minHeight: "90vh" }}
 		>
+			<Title title={"Register"} />
 			<form className="shadow-lg" onSubmit={handleCreateUser}>
 				<h1 className="text-center mb-4 text-2xl">Register</h1>
 				{inputs.map((input) => (

@@ -36,8 +36,13 @@ const Item = (props) => {
 						Update Stock
 					</button>
 				</div>
-				<p className="flex justify-center items-center w-14 h-8 absolute bg-yellow-50 rounded-sm text-black top-3 left-4">
-					${price}
+				<p className="flex justify-center items-center w-14 h-8 absolute bg-yellow-50 rounded-sm text-black top-3 left-4 font-bold">
+					<span>{price}</span>
+					<img
+						className="w-3 h-3"
+						src="https://i.ibb.co/zZtBhgs/taka1.png"
+						alt=""
+					/>
 				</p>
 			</div>
 		</div>

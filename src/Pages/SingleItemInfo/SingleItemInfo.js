@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import Title from "../Common/Title/Title";
 import Modal from "../SmallComponents/Modal/Modal";
 
 const SingleItemInfo = () => {
@@ -65,7 +66,10 @@ const SingleItemInfo = () => {
 				date: new Date().toLocaleDateString(),
 				time: new Date().toLocaleTimeString(),
 			};
-			await axios.post("http://localhost:5000/soldProducts", { ...sold });
+			await axios.post(
+				"https://intense-wave-00513.herokuapp.com/soldProducts",
+				{ ...sold }
+			);
 		} else {
 			toast("Not enough items left");
 		}
@@ -98,6 +102,7 @@ const SingleItemInfo = () => {
 			className="container py-20 mx-auto px-2"
 			style={{ minHeight: "80vh" }}
 		>
+			<Title title={"Stock or Deliver Items"} />
 			<h2 className="text-center text-gray-500 text-2xl uppercase mb-8">
 				Inventory
 			</h2>
@@ -166,7 +171,7 @@ const SingleItemInfo = () => {
 			)}
 			<div className="flex justify-end pt-6 mr-5">
 				<Link
-					to={"/inventory"}
+					to={"/manageitems"}
 					className="inline-block px-6 py-2.5 bg-transparent text-blue-600 font-medium text-lg leading-tight uppercase rounded hover:underline  focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out cursor-pointer"
 				>
 					Manage Inventories{" "}
