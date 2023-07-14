@@ -7,6 +7,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import "./Register.css";
 
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import useToken from "../../../CustomHooks/useToken";
 import auth from "../../../firebase.init";
@@ -31,7 +33,7 @@ const Register = () => {
       sendEmailVerification: true,
     });
   //profile update
-  const [updateProfile, updating, errorP] = useUpdateProfile(auth);
+  const [updateProfile] = useUpdateProfile(auth);
 
   const [signInWithGoogle, userg, loadingG] = useSignInWithGoogle(auth);
 
@@ -191,7 +193,7 @@ const Register = () => {
                         duration-150
                         ease-in-out"
         >
-          <i className="  text-blue-500 fa-brands fa-google"></i>
+          <FontAwesomeIcon className="text-blue-500" icon={faGoogle} />
           <span className="ml-3">Continue with google</span>
         </button>
       </form>

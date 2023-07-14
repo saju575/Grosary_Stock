@@ -6,21 +6,21 @@ import auth from "../../../firebase.init";
 import "./Navbar.css";
 
 const Navbar = () => {
-	const navigate = useNavigate();
-	//login page navigate
-	const handleLoginBtn = () => {
-		navigate("/login");
-	};
+  const navigate = useNavigate();
+  //login page navigate
+  const handleLoginBtn = () => {
+    navigate("/login");
+  };
 
-	const [user] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
-	const handleSignOut = () => {
-		signOut(auth);
-	};
-	return (
-		<div className="sticky-top">
-			<nav
-				className="
+  const handleSignOut = () => {
+    signOut(auth);
+  };
+  return (
+    <div className="sticky-top">
+      <nav
+        className="
                     relative
                     w-full
                     flex flex-wrap
@@ -35,10 +35,10 @@ const Navbar = () => {
                     navbar navbar-expand-lg navbar-light
                     
                     "
-			>
-				<div className="container mx-auto w-full flex flex-wrap items-center justify-between px-6">
-					<button
-						className="
+      >
+        <div className="container mx-auto w-full flex flex-wrap items-center justify-between px-6">
+          <button
+            className="
                         navbar-toggler
                         text-gray-500
                         border-0
@@ -48,35 +48,35 @@ const Navbar = () => {
                         bg-transparent
                         focus:outline-none focus:ring-0 focus:shadow-none focus:no-underline
                         "
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<svg
-							aria-hidden="true"
-							focusable="false"
-							data-prefix="fas"
-							data-icon="bars"
-							className="w-6"
-							role="img"
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 448 512"
-						>
-							<path
-								fill="currentColor"
-								d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-							></path>
-						</svg>
-					</button>
-					<div
-						className="collapse navbar-collapse flex-grow items-center"
-						id="navbarSupportedContent"
-					>
-						<NavLink
-							className="
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              data-prefix="fas"
+              data-icon="bars"
+              className="w-6"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="currentColor"
+                d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
+              ></path>
+            </svg>
+          </button>
+          <div
+            className="collapse navbar-collapse flex-grow items-center"
+            id="navbarSupportedContent"
+          >
+            <NavLink
+              className="
                                 flex
                                 items-center
                                 text-gray-900
@@ -86,111 +86,93 @@ const Navbar = () => {
                                 lg:mt-0
                                 mr-1
                             "
-							to={"/"}
-						>
-							<img
-								src="https://i.ibb.co/ZSW09Bv/grocery.png"
-								style={{ height: "15px" }}
-								alt=""
-								loading="lazy"
-							/>{" "}
-							<span className="font-bold">Grosery Stock</span>
-						</NavLink>
-						{/* <!-- Left links --> */}
-						<ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
-							<li className="nav-item p-2">
-								<NavLink
-									to={"/"}
-									className={(navInfo) =>
-										navInfo.isActive
-											? `active-l nav-link`
-											: `a nav-link`
-									}
-								>
-									Home
-								</NavLink>
-							</li>
-							<li className="nav-item p-2">
-								<NavLink
-									to={"/manageitems"}
-									className={(navInfo) =>
-										navInfo.isActive
-											? `active-l nav-link`
-											: `a nav-link`
-									}
-								>
-									Manage Items
-								</NavLink>
-							</li>
-							<li className="nav-item p-2">
-								<NavLink
-									to={"/solditems"}
-									className={(navInfo) =>
-										navInfo.isActive
-											? `active-l nav-link`
-											: `a nav-link`
-									}
-								>
-									Sold items
-								</NavLink>
-							</li>
-							<li className="nav-item p-2">
-								<NavLink
-									to={"/blogs"}
-									className={(navInfo) =>
-										navInfo.isActive
-											? `active-l nav-link`
-											: `a nav-link`
-									}
-								>
-									Blogs
-								</NavLink>
-							</li>
-						</ul>
-					</div>
-					{!user?.emailVerified ? (
-						<button
-							onClick={handleLoginBtn}
-							className="bg-blue-700 text-white px-4 py-1 rounded hover:text-amber-500"
-						>
-							Login
-						</button>
-					) : (
-						<div className="flex justify-center">
-							<div>
-								<div className="dropdown relative">
-									<button
-										className="
+              to={"/"}
+            >
+              <img
+                src="https://i.ibb.co/ZSW09Bv/grocery.png"
+                style={{ height: "15px" }}
+                alt=""
+                loading="lazy"
+              />{" "}
+              <span className="font-bold">Grosery Stock</span>
+            </NavLink>
+            {/* <!-- Left links --> */}
+            <ul className="navbar-nav flex flex-col pl-0 list-style-none mr-auto">
+              <li className="nav-item p-2">
+                <NavLink
+                  to={"/"}
+                  className={(navInfo) =>
+                    navInfo.isActive ? `active-l nav-link` : `a nav-link`
+                  }
+                >
+                  Home
+                </NavLink>
+              </li>
+              <li className="nav-item p-2">
+                <NavLink
+                  to={"/manageitems"}
+                  className={(navInfo) =>
+                    navInfo.isActive ? `active-l nav-link` : `a nav-link`
+                  }
+                >
+                  Manage Items
+                </NavLink>
+              </li>
+              <li className="nav-item p-2">
+                <NavLink
+                  to={"/solditems"}
+                  className={(navInfo) =>
+                    navInfo.isActive ? `active-l nav-link` : `a nav-link`
+                  }
+                >
+                  Sold items
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+          {!user?.emailVerified ? (
+            <button
+              onClick={handleLoginBtn}
+              className="bg-blue-700 text-white px-4 py-1 rounded hover:text-amber-500"
+            >
+              Login
+            </button>
+          ) : (
+            <div className="flex justify-center">
+              <div>
+                <div className="dropdown relative">
+                  <button
+                    className="
 										dropdown-toggle
 										px-4 py-1.5 bg-transparent text-gray-500 font-medium text-xs leading-tight uppercase rounded  hover:text-gray-700  focus:text-gray-700 focus:outline-none focus:ring-0 active:text-gray-700  transition duration-150 ease-in-out
 										flex
 										items-center
 										whitespace-nowrap
 									"
-										type="button"
-										id="dropdownMenuSmallButton"
-										data-bs-toggle="dropdown"
-										aria-expanded="false"
-									>
-										{user.displayName}
-										<svg
-											aria-hidden="true"
-											focusable="false"
-											data-prefix="fas"
-											data-icon="caret-down"
-											className="w-2 ml-2"
-											role="img"
-											xmlns="http://www.w3.org/2000/svg"
-											viewBox="0 0 320 512"
-										>
-											<path
-												fill="currentColor"
-												d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
-											></path>
-										</svg>
-									</button>
-									<ul
-										className="
+                    type="button"
+                    id="dropdownMenuSmallButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {user.displayName}
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="caret-down"
+                      className="w-2 ml-2"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 320 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                      ></path>
+                    </svg>
+                  </button>
+                  <ul
+                    className="
 										dropdown-menu
 										min-w-max
 										absolute
@@ -210,12 +192,12 @@ const Navbar = () => {
 										bg-clip-padding
 										border-none
 									"
-										aria-labelledby="dropdownMenuSmallButton"
-									>
-										<li>
-											<Link
-												to={"/addProduct"}
-												className="
+                    aria-labelledby="dropdownMenuSmallButton"
+                  >
+                    <li>
+                      <Link
+                        to={"/addProduct"}
+                        className="
 												dropdown-item
 												text-sm
 												py-2
@@ -228,14 +210,14 @@ const Navbar = () => {
 												text-gray-700
 												hover:bg-gray-100
           "
-											>
-												Add product
-											</Link>
-										</li>
-										<li>
-											<Link
-												to={"/myaddproducts"}
-												className="
+                      >
+                        Add product
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to={"/myaddproducts"}
+                        className="
 												dropdown-item
 												text-sm
 												py-2
@@ -248,14 +230,14 @@ const Navbar = () => {
 												text-gray-700
 												hover:bg-gray-100
 											"
-											>
-												My items
-											</Link>
-										</li>
-										<li>
-											<Link
-												to={"/manageitems"}
-												className="
+                      >
+                        My items
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to={"/manageitems"}
+                        className="
 												dropdown-item
 												text-sm
 												py-2
@@ -268,14 +250,14 @@ const Navbar = () => {
 												text-gray-700
 												hover:bg-gray-100
 											"
-											>
-												Manage Items
-											</Link>
-										</li>
-										<li>
-											<span
-												onClick={handleSignOut}
-												className="
+                      >
+                        Manage Items
+                      </Link>
+                    </li>
+                    <li>
+                      <span
+                        onClick={handleSignOut}
+                        className="
 												dropdown-item
 												text-sm
 												py-2
@@ -289,21 +271,21 @@ const Navbar = () => {
 												hover:bg-gray-100
 												cursor-pointer
          									"
-											>
-												Logout
-											</span>
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					)}
+                      >
+                        Logout
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
 
-					{/* <!-- Right elements --> */}
-				</div>
-			</nav>
-		</div>
-	);
+          {/* <!-- Right elements --> */}
+        </div>
+      </nav>
+    </div>
+  );
 };
 
 export default Navbar;
